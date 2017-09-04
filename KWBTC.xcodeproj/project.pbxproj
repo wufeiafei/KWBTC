@@ -163,6 +163,7 @@
 				TargetAttributes = {
 					0A57F89E1F5D069A0062EDD2 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 37DS582758;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -354,11 +355,14 @@
 			baseConfigurationReference = B0FA7EC06EF8EE638AE4A143 /* Pods-KWBTC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 37DS582758;
 				INFOPLIST_FILE = KWBTC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = afei.com.KWBTC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tfd.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -367,11 +371,14 @@
 			baseConfigurationReference = 78A7532C7C6A81259806ED0E /* Pods-KWBTC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 37DS582758;
 				INFOPLIST_FILE = KWBTC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = afei.com.KWBTC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tfd.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
