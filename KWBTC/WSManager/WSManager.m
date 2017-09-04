@@ -72,6 +72,20 @@
 }
 
 
+-(void)sendLTC
+{
+    
+    NSDictionary *dic = @{
+                          @"sub": @"market.ltccny.kline.1min",
+                          @"id": @"id1"
+                          };
+    
+    NSString *string = [KBCommon transferJsonToDataStringWithDic:dic];
+    
+    [socket writeString:string];
+    
+}
+
 #pragma mark -- pong
 -(void)pongServerWithPongSting:(NSString*)pongString
 {
@@ -95,6 +109,8 @@
     NSLog(@"websocket is connected");
     
     [self sendBTC];
+    [self sendLTC];
+    
 }
 
 -(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
@@ -123,17 +139,30 @@
         
         [self pongServerWithPongSting:dic[@"ping"]];
         
+        return;
     }
     
-    if (dic[@"tick"]) {
+    if ([dic[@"ch"] isEqualToString:@"market.btccny.kline.1min"]&&dic[@"tick"]) {
         
         NSDictionary *tickDic =dic[@"tick"];
         NSString *BTCPrice = tickDic[@"close"];
-        
+        _btcPrice = BTCPrice;
         if (_btcBlock) {
             _btcBlock(BTCPrice);
         }
+        return;
+    }
+    
+    if ([dic[@"ch"] isEqualToString:@"market.ltccny.kline.1min"]&&dic[@"tick"]) {
         
+        NSDictionary *tickDic =dic[@"tick"];
+        NSString *LTCPrice = tickDic[@"close"];
+        _ltcPrice = LTCPrice;
+        if (_ltcBlock) {
+            _ltcBlock(LTCPrice);
+        }
+        
+        return;
     }
     
 }

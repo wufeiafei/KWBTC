@@ -9,11 +9,18 @@
 #import <Foundation/Foundation.h>
 
 
-typedef void (^BTCPriceBlock)(NSString *price);
+typedef void (^DCPriceBlock)(NSString *price);
 
 @interface WSManager : NSObject
 
-@property(nonatomic, copy) BTCPriceBlock btcBlock;
+@property(nonatomic, strong) NSString *btcPrice;
+
+@property(nonatomic, strong) NSString *ltcPrice;
+
+@property(nonatomic, copy) DCPriceBlock btcBlock;
+
+@property(nonatomic, copy) DCPriceBlock ltcBlock;
+
 
 + (WSManager *)sharedController;
 

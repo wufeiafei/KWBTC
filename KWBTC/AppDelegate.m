@@ -26,7 +26,7 @@
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
     NSMenu *menu = [[NSMenu alloc] init];
-    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"BTC - 火币网"
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"退出"
                                                   action:@selector(itemPressed:)
                                            keyEquivalent:@""];
     
@@ -36,10 +36,15 @@
     self.statusItem.menu = menu;
     
    
-    
     [WSManager sharedController].btcBlock = ^(NSString *price) {
         
-         self.statusItem.title = [NSString stringWithFormat:@"BTC - %@",price];
+        [self refershPrice];
+      
+    };
+    
+    [WSManager sharedController].ltcBlock = ^(NSString *price) {
+        
+        [self refershPrice];
         
     };
     
@@ -56,6 +61,18 @@
 -(void)itemPressed:(id)sender
 {
 
+    [[NSApplication sharedApplication] terminate:self];
+
+}
+
+
+#pragma mark -- refersh
+-(void)refershPrice
+{
+
+    NSString *btcPrice = [WSManager sharedController].btcPrice;
+    NSString *ltcPrice = [WSManager sharedController].ltcPrice;
+    self.statusItem.title = [NSString stringWithFormat:@"BTC-%@ | LTC-%@",btcPrice,ltcPrice];
 
 }
 
