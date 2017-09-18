@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A041D531F6FACB60033804F /* BFWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A041D521F6FACB60033804F /* BFWSManager.m */; };
 		0A57F8A41F5D069A0062EDD2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A31F5D069A0062EDD2 /* AppDelegate.m */; };
 		0A57F8A71F5D069A0062EDD2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A61F5D069A0062EDD2 /* main.m */; };
 		0A57F8AA1F5D069A0062EDD2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A91F5D069A0062EDD2 /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A041D511F6FACB60033804F /* BFWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWSManager.h; sourceTree = "<group>"; };
+		0A041D521F6FACB60033804F /* BFWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWSManager.m; sourceTree = "<group>"; };
 		0A57F89F1F5D069A0062EDD2 /* KWBTC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWBTC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A57F8A21F5D069A0062EDD2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A57F8A31F5D069A0062EDD2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 		0A57F8B61F5D36EE0062EDD2 /* WSManager */ = {
 			isa = PBXGroup;
 			children = (
+				0A041D511F6FACB60033804F /* BFWSManager.h */,
+				0A041D521F6FACB60033804F /* BFWSManager.m */,
 				0A57F8B71F5D370B0062EDD2 /* WSManager.h */,
 				0A57F8B81F5D370B0062EDD2 /* WSManager.m */,
 			);
@@ -255,6 +260,7 @@
 				0A57F8A71F5D069A0062EDD2 /* main.m in Sources */,
 				0A57F8A41F5D069A0062EDD2 /* AppDelegate.m in Sources */,
 				0A57F8B91F5D370B0062EDD2 /* WSManager.m in Sources */,
+				0A041D531F6FACB60033804F /* BFWSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

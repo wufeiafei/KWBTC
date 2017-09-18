@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WSManager.h"
+#import "BFWSManager.h"
 
 
 @interface AppDelegate ()
@@ -35,7 +36,7 @@
     
     self.statusItem.menu = menu;
     
-   
+   /*
     [WSManager sharedController].btcBlock = ^(NSString *price) {
         
         [self refershPrice];
@@ -45,6 +46,14 @@
     [WSManager sharedController].ltcBlock = ^(NSString *price) {
         
         [self refershPrice];
+        
+    };
+    
+    */
+    
+    [BFWSManager sharedController].btcBlock = ^(NSString *price) {
+        
+        [self refershBFPrice];
         
     };
     
@@ -74,6 +83,16 @@
     NSString *ltcPrice = [WSManager sharedController].ltcPrice;
     self.statusItem.title = [NSString stringWithFormat:@"BTC-%@ | LTC-%@",btcPrice,ltcPrice];
 
+}
+
+
+-(void)refershBFPrice
+{
+    
+    NSString *btcPrice = [BFWSManager sharedController].btcPrice;
+   // NSString *ltcPrice = [WSManager sharedController].ltcPrice;
+    self.statusItem.title = [NSString stringWithFormat:@"BTC-$%@",btcPrice];
+    
 }
 
 @end
