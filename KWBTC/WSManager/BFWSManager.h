@@ -19,4 +19,9 @@ typedef void (^DCPriceBlock)(NSString *price);
 
 + (BFWSManager *)sharedController;
 
+
+-(void)disConnect;
+
+-(void)connect;
+
 @end

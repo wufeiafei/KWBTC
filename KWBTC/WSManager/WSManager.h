@@ -15,15 +15,19 @@ typedef void (^DCPriceBlock)(NSString *price);
 
 @property(nonatomic, strong) NSString *btcPrice;
 
-@property(nonatomic, strong) NSString *ltcPrice;
+//@property(nonatomic, strong) NSString *ltcPrice;
 
 @property(nonatomic, copy) DCPriceBlock btcBlock;
 
-@property(nonatomic, copy) DCPriceBlock ltcBlock;
+//@property(nonatomic, copy) DCPriceBlock ltcBlock;
 
 
 + (WSManager *)sharedController;
 
+
+-(void)disConnect;
+
+-(void)connect;
 
 
 

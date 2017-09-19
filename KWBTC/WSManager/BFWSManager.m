@@ -42,8 +42,6 @@
                                          protocols:@[@"chat",@"superchat"]];
         socket.delegate = self;
         
-        [self connect];
-        
     }
     return self;
 }
@@ -57,6 +55,13 @@
     
 }
 
+
+-(void)disConnect
+{
+
+    [socket disconnect];
+
+}
 
 #pragma mark -- send
 -(void)sendBTC
@@ -99,34 +104,10 @@
 }
 
 
+#pragma mark -- parse
+-(void)parseWithData:(id)data
+{
 
-#pragma mark -- delegate
--(void)websocketDidConnect:(JFRWebSocket*)socket {
-    
-    NSLog(@"websocket is connected");
-    
-    [self sendBTC];
-    
-}
-
--(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
-    NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
-    
-    [self connect];
-}
-
--(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {
-    NSLog(@"got some text: %@",string);
-    
-    NSData *uData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSError *error;
-    id data = [NSJSONSerialization JSONObjectWithData:uData
-                                               options:0
-                                                 error:&error];
-    
-    NSLog(@"data:%@",data);
-    
     if ([data isKindOfClass:[NSArray class]]&&data) {
         NSArray *array =  data;
         
@@ -147,6 +128,40 @@
             }
         }
     }
+
+
+}
+
+
+#pragma mark -- delegate
+-(void)websocketDidConnect:(JFRWebSocket*)socket {
+    
+    NSLog(@"websocket is connected");
+    
+    [self sendBTC];
+    
+}
+
+-(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
+    NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
+    
+    
+}
+
+-(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {
+    NSLog(@"got some text: %@",string);
+    
+    NSData *uData = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error;
+    id data = [NSJSONSerialization JSONObjectWithData:uData
+                                               options:0
+                                                 error:&error];
+    
+    NSLog(@"data:%@",data);
+    
+    [self parseWithData:data];
+    
     
 }
 
@@ -154,32 +169,7 @@
 -(void)websocket:(JFRWebSocket*)socket didReceiveData:(NSData*)data {
     NSLog(@"got some binary data: %d",data.length);
     
-    NSData *uData = [KBCommon uncompressZippedData:data];
-    
-    NSError *error;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:uData
-                                                        options:0
-                                                          error:&error];
-    NSLog(@"dic:%@",dic);
-    
-    if (dic[@"ping"]) {
-        
-        [self pongServerWithPongSting:dic[@"ping"]];
-        
-        return;
-    }
-    
-    if ([dic[@"ch"] isEqualToString:@"market.btccny.kline.1min"]&&dic[@"tick"]) {
-        
-        NSDictionary *tickDic =dic[@"tick"];
-        NSString *BTCPrice = tickDic[@"close"];
-        _btcPrice = BTCPrice;
-        if (_btcBlock) {
-            _btcBlock(BTCPrice);
-        }
-        return;
-    }
-    
+
   
     
 }
