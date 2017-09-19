@@ -1,28 +1,28 @@
 //
-//  WSManager.m
+//  LTCManager.m
 //  KWBTC
 //
-//  Created by Kevin on 2017/9/4.
+//  Created by Kevin on 2017/9/19.
 //  Copyright © 2017年 Kevin. All rights reserved.
 //
 
-#import "WSManager.h"
+#import "LTCManager.h"
 #import "JFRWebSocket.h"
-#import "KBCommon.h"
 
 
-@interface WSManager()<JFRWebSocketDelegate>
+@interface LTCManager()<JFRWebSocketDelegate>
 {
     JFRWebSocket *socket;
 }
 
 @end
 
-@implementation WSManager
+
+@implementation LTCManager
 
 #pragma mark -- init
-+ (WSManager *)sharedController{
-    static WSManager *controller = nil;
++ (LTCManager *)sharedController{
+    static LTCManager *controller = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         controller = [[self alloc] init];
@@ -40,7 +40,7 @@
         socket.delegate = self;
         
         //[self connect];
-       
+        
         
     }
     return self;
@@ -50,34 +50,20 @@
 #pragma mark -- conntect
 -(void)connect
 {
-
-     [socket connect];
-
+    
+    [socket connect];
+    
 }
 
 -(void)disConnect
 {
-
+    
     [socket disconnect];
 }
 
 
 #pragma mark -- send
--(void)sendBTC
-{
 
-    NSDictionary *dic = @{
-                          @"sub": @"market.btccny.kline.1min",
-                          @"id": @"id1"
-                          };
-    
-    NSString *string = [KBCommon transferJsonToDataStringWithDic:dic];
-    
-    [socket writeString:string];
-
-}
-
-/*
 -(void)sendLTC
 {
     
@@ -91,9 +77,6 @@
     [socket writeString:string];
     
 }
-*/
-
-
 
 #pragma mark -- pong
 -(void)pongServerWithPongSting:(NSString*)pongString
@@ -117,14 +100,15 @@
     
     NSLog(@"websocket is connected");
     
-    [self sendBTC];
+    [self sendLTC];
+    
     
 }
 
 -(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
     NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
-
-   // [self connect];
+    
+    // [self connect];
 }
 
 -(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {
@@ -150,18 +134,20 @@
         return;
     }
     
-    if ([dic[@"ch"] isEqualToString:@"market.btccny.kline.1min"]&&dic[@"tick"]) {
+
+    if ([dic[@"ch"] isEqualToString:@"market.ltccny.kline.1min"]&&dic[@"tick"]) {
         
         NSDictionary *tickDic =dic[@"tick"];
-        NSString *BTCPrice = tickDic[@"close"];
-        _btcPrice = BTCPrice;
-        if (_btcBlock) {
-            _btcBlock(BTCPrice);
+        NSString *LTCPrice = tickDic[@"close"];
+        _ltcPrice = LTCPrice;
+        if (_ltcBlock) {
+            _ltcBlock(LTCPrice);
         }
+        
         return;
     }
     
-    
 }
+
 
 @end

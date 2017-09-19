@@ -1,0 +1,32 @@
+//
+//  PrefixHeader.pch
+//  KWBTC
+//
+//  Created by Kevin on 2017/9/19.
+//  Copyright © 2017年 Kevin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import"KBCommon.h"
+#import "extobjc.h"
+#import "KWSelectManager.h"
+#import "WSManager.h"
+#import "BFWSManager.h"
+#import "LTCManager.h"
+
+
+
+#define k_BF_BTC    @"KW_BF_BTC"
+
+#define k_HB_BTC    @"KW_HB_BTC"
+
+#define k_HB_LTC    @"KW_HB_LTC"
+
+
+#endif /* PrefixHeader_pch */
