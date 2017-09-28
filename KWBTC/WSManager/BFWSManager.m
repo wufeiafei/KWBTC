@@ -9,6 +9,7 @@
 #import "BFWSManager.h"
 #import "JFRWebSocket.h"
 #import "KBCommon.h"
+#import "KWSelectManager.h"
 
 
 @interface BFWSManager()<JFRWebSocketDelegate>
@@ -145,6 +146,10 @@
 -(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
     NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
     
+    if ([KWSelectManager sharedController].hasBFBTC) {
+        
+        [self connect];
+    }
     
 }
 

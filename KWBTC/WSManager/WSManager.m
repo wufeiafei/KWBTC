@@ -123,8 +123,11 @@
 
 -(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
     NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
-
-   // [self connect];
+    if ([KWSelectManager sharedController].hasHBBTC) {
+        
+         [self connect];
+    }
+   
 }
 
 -(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {
