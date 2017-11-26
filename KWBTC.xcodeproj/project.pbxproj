@@ -8,21 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0A041D531F6FACB60033804F /* BFWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A041D521F6FACB60033804F /* BFWSManager.m */; };
+		0A06A7D41FCB044100ABBD66 /* KWNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06A7D31FCB044100ABBD66 /* KWNetworkController.m */; };
+		0A06A7DC1FCB12AE00ABBD66 /* KWRateDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06A7DB1FCB12AE00ABBD66 /* KWRateDateModel.m */; };
 		0A57F8A41F5D069A0062EDD2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A31F5D069A0062EDD2 /* AppDelegate.m */; };
 		0A57F8A71F5D069A0062EDD2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A61F5D069A0062EDD2 /* main.m */; };
 		0A57F8AA1F5D069A0062EDD2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8A91F5D069A0062EDD2 /* ViewController.m */; };
 		0A57F8AC1F5D069A0062EDD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A57F8AB1F5D069A0062EDD2 /* Assets.xcassets */; };
-		0A57F8B91F5D370B0062EDD2 /* WSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8B81F5D370B0062EDD2 /* WSManager.m */; };
 		0A57F8BE1F5D38E10062EDD2 /* KBCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A57F8BC1F5D38E10062EDD2 /* KBCommon.m */; };
 		0A57F8C01F5D3ADB0062EDD2 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A57F8BF1F5D3ADB0062EDD2 /* libz.1.2.5.tbd */; };
 		0AA102181F711AA7008447F8 /* KWSelectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA102171F711AA7008447F8 /* KWSelectManager.m */; };
-		0AA1021B1F714480008447F8 /* LTCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1021A1F714480008447F8 /* LTCManager.m */; };
 		14C4B660755997B7B24FC75C /* libPods-KWBTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3015F77372B766B744E1FF58 /* libPods-KWBTC.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A041D511F6FACB60033804F /* BFWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWSManager.h; sourceTree = "<group>"; };
 		0A041D521F6FACB60033804F /* BFWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWSManager.m; sourceTree = "<group>"; };
+		0A06A7D31FCB044100ABBD66 /* KWNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWNetworkController.m; sourceTree = "<group>"; };
+		0A06A7D51FCB044500ABBD66 /* KWNetworkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWNetworkController.h; sourceTree = "<group>"; };
+		0A06A7D61FCB044C00ABBD66 /* KWNetworkConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWNetworkConstants.h; sourceTree = "<group>"; };
+		0A06A7DA1FCB12AE00ABBD66 /* KWRateDateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWRateDateModel.h; sourceTree = "<group>"; };
+		0A06A7DB1FCB12AE00ABBD66 /* KWRateDateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KWRateDateModel.m; sourceTree = "<group>"; };
 		0A082BB81F70F0FB003E068A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0A57F89F1F5D069A0062EDD2 /* KWBTC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWBTC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A57F8A21F5D069A0062EDD2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -32,16 +37,12 @@
 		0A57F8A91F5D069A0062EDD2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0A57F8AB1F5D069A0062EDD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A57F8B01F5D069A0062EDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A57F8B71F5D370B0062EDD2 /* WSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSManager.h; sourceTree = "<group>"; };
-		0A57F8B81F5D370B0062EDD2 /* WSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSManager.m; sourceTree = "<group>"; };
 		0A57F8BB1F5D38E10062EDD2 /* KBCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBCommon.h; sourceTree = "<group>"; };
 		0A57F8BC1F5D38E10062EDD2 /* KBCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBCommon.m; sourceTree = "<group>"; };
 		0A57F8BD1F5D38E10062EDD2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0A57F8BF1F5D3ADB0062EDD2 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		0AA102161F711AA7008447F8 /* KWSelectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWSelectManager.h; sourceTree = "<group>"; };
 		0AA102171F711AA7008447F8 /* KWSelectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWSelectManager.m; sourceTree = "<group>"; };
-		0AA102191F714480008447F8 /* LTCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCManager.h; sourceTree = "<group>"; };
-		0AA1021A1F714480008447F8 /* LTCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTCManager.m; sourceTree = "<group>"; };
 		3015F77372B766B744E1FF58 /* libPods-KWBTC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KWBTC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A7532C7C6A81259806ED0E /* Pods-KWBTC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWBTC.release.xcconfig"; path = "Pods/Target Support Files/Pods-KWBTC/Pods-KWBTC.release.xcconfig"; sourceTree = "<group>"; };
 		B0FA7EC06EF8EE638AE4A143 /* Pods-KWBTC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KWBTC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KWBTC/Pods-KWBTC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +61,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A06A7CC1FCA9A3300ABBD66 /* NetwokController */ = {
+			isa = PBXGroup;
+			children = (
+				0A06A7D61FCB044C00ABBD66 /* KWNetworkConstants.h */,
+				0A06A7D51FCB044500ABBD66 /* KWNetworkController.h */,
+				0A06A7D31FCB044100ABBD66 /* KWNetworkController.m */,
+			);
+			path = NetwokController;
+			sourceTree = "<group>";
+		};
+		0A06A7D71FCB122A00ABBD66 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				0A06A7D81FCB123A00ABBD66 /* DataModel */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		0A06A7D81FCB123A00ABBD66 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A06A7D91FCB129900ABBD66 /* RateDataModel */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		0A06A7D91FCB129900ABBD66 /* RateDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A06A7DA1FCB12AE00ABBD66 /* KWRateDateModel.h */,
+				0A06A7DB1FCB12AE00ABBD66 /* KWRateDateModel.m */,
+			);
+			path = RateDataModel;
+			sourceTree = "<group>";
+		};
 		0A57F8961F5D069A0062EDD2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +121,8 @@
 				0A57F8A31F5D069A0062EDD2 /* AppDelegate.m */,
 				0A57F8A81F5D069A0062EDD2 /* ViewController.h */,
 				0A57F8A91F5D069A0062EDD2 /* ViewController.m */,
+				0A06A7D71FCB122A00ABBD66 /* DataManager */,
+				0A06A7CC1FCA9A3300ABBD66 /* NetwokController */,
 				0AA102151F711A8F008447F8 /* KWSelectManager */,
 				0A57F8BA1F5D38E10062EDD2 /* Common */,
 				0A57F8B61F5D36EE0062EDD2 /* WSManager */,
@@ -109,10 +147,6 @@
 			children = (
 				0A041D511F6FACB60033804F /* BFWSManager.h */,
 				0A041D521F6FACB60033804F /* BFWSManager.m */,
-				0A57F8B71F5D370B0062EDD2 /* WSManager.h */,
-				0A57F8B81F5D370B0062EDD2 /* WSManager.m */,
-				0AA102191F714480008447F8 /* LTCManager.h */,
-				0AA1021A1F714480008447F8 /* LTCManager.m */,
 			);
 			path = WSManager;
 			sourceTree = "<group>";
@@ -276,12 +310,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A57F8AA1F5D069A0062EDD2 /* ViewController.m in Sources */,
+				0A06A7DC1FCB12AE00ABBD66 /* KWRateDateModel.m in Sources */,
 				0A57F8BE1F5D38E10062EDD2 /* KBCommon.m in Sources */,
 				0A57F8A71F5D069A0062EDD2 /* main.m in Sources */,
 				0A57F8A41F5D069A0062EDD2 /* AppDelegate.m in Sources */,
 				0AA102181F711AA7008447F8 /* KWSelectManager.m in Sources */,
-				0AA1021B1F714480008447F8 /* LTCManager.m in Sources */,
-				0A57F8B91F5D370B0062EDD2 /* WSManager.m in Sources */,
+				0A06A7D41FCB044100ABBD66 /* KWNetworkController.m in Sources */,
 				0A041D531F6FACB60033804F /* BFWSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

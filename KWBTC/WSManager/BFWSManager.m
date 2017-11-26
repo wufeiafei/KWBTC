@@ -146,11 +146,8 @@
 -(void)websocketDidDisconnect:(JFRWebSocket*)socket error:(NSError*)error {
     NSLog(@"websocket is disconnected: %@",[error localizedDescription]);
     
-    if ([KWSelectManager sharedController].hasBFBTC) {
-        
-        [self connect];
-    }
-    
+    [self connect];
+
 }
 
 -(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {

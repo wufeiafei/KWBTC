@@ -28,5 +28,10 @@
 	<string>Copyright © 2017年 Kevin. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+	</dict>
 </dict>
 </plist>

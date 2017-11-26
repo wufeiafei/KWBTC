@@ -10,12 +10,9 @@
 
 @interface KWSelectManager : NSObject
 
-@property(nonatomic, assign) BOOL hasBFBTC;
+@property(nonatomic, assign) BOOL hasRMB;
 
-@property(nonatomic, assign) BOOL hasHBBTC;
-
-@property(nonatomic, assign) BOOL hasHBLTC;
-
+@property(nonatomic,strong) NSString *rateString;//汇率
 
 + (KWSelectManager *)sharedController;
 

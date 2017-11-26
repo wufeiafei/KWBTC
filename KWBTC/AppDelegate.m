@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "WSManager.h"
 #import "BFWSManager.h"
+#import "KWRateDateModel.h"
 
 
 @interface AppDelegate ()
@@ -19,11 +19,7 @@
 
 @property (nonatomic, strong) NSMenu *menu;
 
-@property (nonatomic, strong) NSMenuItem *bfItem;
-
-@property (nonatomic, strong) NSMenuItem *hbItem;
-
-@property (nonatomic, strong) NSMenuItem *hblItem;
+@property (nonatomic, strong) NSMenuItem *rmbItem;
 
 @property (nonatomic, strong) NSMenuItem *exitItem;
 
@@ -39,19 +35,6 @@
     [self initSubView];
     
 
-    [WSManager sharedController].btcBlock = ^(NSString *price) {
-        
-        [self refershPrice];
-      
-    };
-    
-    [LTCManager sharedController].ltcBlock = ^(NSString *price) {
-        
-        [self refershPrice];
-        
-    };
-    
-    
     [BFWSManager sharedController].btcBlock = ^(NSString *price) {
         
         [self refershPrice];
@@ -72,9 +55,8 @@
 -(void)initSubView
 {
 
-    [self.menu addItem:self.bfItem];
-    [self.menu addItem:self.hbItem];
-    [self.menu addItem:self.hblItem];
+
+    [self.menu addItem:self.rmbItem];
     [self.menu addItem:self.exitItem];
     
     self.statusItem.menu = self.menu;
@@ -85,127 +67,72 @@
 -(void)loadLocalData
 {
 
-    NSString *bBTCString = [[NSUserDefaults standardUserDefaults] objectForKey:k_BF_BTC];
-    NSString *hBTCString = [[NSUserDefaults standardUserDefaults] objectForKey:k_HB_BTC];
-    NSString *hLTCString = [[NSUserDefaults standardUserDefaults] objectForKey:k_HB_LTC];
+    NSString *bRMBString = [[NSUserDefaults standardUserDefaults] objectForKey:k_RMB];
+   
     
-    if (bBTCString.length) {
+     [[BFWSManager sharedController] connect];
+    
+    if (bRMBString.length) {
         
-        self.bfItem.state = 1;
-        [KWSelectManager sharedController].hasBFBTC = YES;
-        [[BFWSManager sharedController] connect];
+        self.rmbItem.state = 1;
+        [KWSelectManager sharedController].hasRMB = YES;
         
-        
+        [self requestFinanceRate];
     }
     
-    if (hBTCString.length) {
+}
+
+-(void)requestFinanceRate
+{
+    @weakify(self);
+    void (^succ)(id data) = ^(id data)
+    {
+        @strongify(self);
+        NSLog(@"data:%@",data);
         
-         self.hbItem.state = 1;
-        [KWSelectManager sharedController].hasHBBTC = YES;
-        [[WSManager sharedController] connect];
+        NSDictionary *resultDic = data[@"result"];
+        KWRateDateModel *bocRateModel = [[KWRateDateModel alloc] initWithParseDictionary:[resultDic[@"USD"] objectForKey:@"BOC"]];
+        [KWSelectManager sharedController].rateString = bocRateModel.middle;
         
-    }
+        [self refershPrice];
+    };
     
-    if (hLTCString.length) {
+    void (^fail)(id data) = ^(id data)
+    {
         
-        self.hblItem.state = 1;
-        [KWSelectManager sharedController].hasHBLTC = YES;
-        [[LTCManager sharedController] connect];
-    }
+        NSLog(@" fail data:%@",data);
         
+    };
     
-    if (!bBTCString.length && !hBTCString.length && !hLTCString.length) {
-        self.bfItem.state = 1;
-        [KWSelectManager sharedController].hasBFBTC = YES;
-        [[BFWSManager sharedController] connect];
-    }
-    
+    [[KWNetworkController sharedController] getFinanceRateWithSuccess:succ
+                                                              Failure:fail];
     
 }
 
 
 #pragma mark -- action
--(void)bfItemPressed:(id)sender
+-(void)rmbItemPressed:(id)sender
 {
     
-    if (self.bfItem.state) {
+    if (self.rmbItem.state) {
         
-        if (!self.hbItem.state&& !self.hblItem.state) {
-            
-            return;
-        }
-        self.bfItem.state = 0;
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:k_BF_BTC];
+        self.rmbItem.state = 0;
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:k_RMB];
         
-        [KWSelectManager sharedController].hasBFBTC = NO;
-        [[BFWSManager sharedController] disConnect];
+        [KWSelectManager sharedController].hasRMB = NO;
+        
     }
     else
     {
-        self.bfItem.state = 1;
-        [[NSUserDefaults standardUserDefaults] setObject:@"BF_BTC" forKey:k_BF_BTC];
+        self.rmbItem.state = 1;
+        [[NSUserDefaults standardUserDefaults] setObject:@"BF_RMB" forKey:k_RMB];
         
-        [KWSelectManager sharedController].hasBFBTC = YES;
-        [[BFWSManager sharedController] connect];
+        [KWSelectManager sharedController].hasRMB = YES;
+        
+        [self requestFinanceRate];
     
     }
-    
-   
-    
-}
 
--(void)hbItemPressed:(id)sender
-{
-    
-    if (self.hbItem.state) {
-        
-        if (!self.bfItem.state&& !self.hblItem.state) {
-            
-            return;
-        }
-        self.hbItem.state = 0;
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:k_HB_BTC];
-        [KWSelectManager sharedController].hasHBBTC = NO;
-        
-        [[WSManager sharedController] disConnect];
-    }
-    else
-    {
-        self.hbItem.state = 1;
-        [[NSUserDefaults standardUserDefaults] setObject:@"HB_BTC" forKey:k_HB_BTC];
-        [KWSelectManager sharedController].hasHBBTC = YES;
-        [[WSManager sharedController] connect];
-    }
-    
-  
-    
-}
-
-
--(void)hblItemPressed:(id)sender
-{
-    
-    if (self.hblItem.state) {
-        
-        if (!self.bfItem.state && !self.hbItem.state) {
-            
-            return;
-        }
-        self.hblItem.state = 0;
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:k_HB_LTC];
-        [KWSelectManager sharedController].hasHBLTC = NO;
-        [[LTCManager sharedController] disConnect];
-    }
-    else
-    {
-        self.hblItem.state = 1;
-        [[NSUserDefaults standardUserDefaults] setObject:@"HB_LTC" forKey:k_HB_LTC];
-        [KWSelectManager sharedController].hasHBLTC = YES;
-        [[LTCManager sharedController] connect];
-    }
-    
-   
-    
 }
 
 
@@ -217,38 +144,7 @@
 
 }
 
-/*
-#pragma mark -- stop
--(void)stopProcess
-{
 
-    [[WSManager sharedController] disConnect];
-    [[BFWSManager sharedController] disConnect];
-    [[LTCManager sharedController] disConnect];
-}
-
-#pragma mark -- start
--(void)startProcess
-{
-
-
-    if ([KWSelectManager sharedController].hasBFBTC) {
-        
-        [[BFWSManager sharedController] connect];
-    
-    }
-    
-    if ([KWSelectManager sharedController].hasHBBTC  ) {
-        
-        [[WSManager sharedController] connect];
-    }
-    
-    if ([KWSelectManager sharedController].hasHBLTC) {
-        [[LTCManager sharedController] connect];
-    }
-    
-}
- */
 
 #pragma mark -- refersh
 -(void)refershPrice
@@ -257,30 +153,24 @@
     
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
     
-    if ([KWSelectManager sharedController].hasBFBTC) {
-       
-        NSString *btcPrice = [BFWSManager sharedController].btcPrice;
+    NSString *btcPrice = [BFWSManager sharedController].btcPrice;
+    CGFloat price = [btcPrice floatValue];
         
-        NSString *bbtcTitle = [NSString stringWithFormat:@"B-$%@",btcPrice];
-        [titleArray addObject:bbtcTitle];
+    NSString *bbtcTitle = [NSString stringWithFormat:@"B-$%.1f",price];
+    [titleArray addObject:bbtcTitle];
         
-    }
-    
-    if ([KWSelectManager sharedController].hasHBBTC) {
+
+    if ([KWSelectManager sharedController].hasRMB) {
         
-        NSString *btcPrice = [WSManager sharedController].btcPrice;
-        NSString *hbtcTitle = [NSString stringWithFormat:@"B-￥%@",btcPrice];
-        [titleArray addObject:hbtcTitle];
+        CGFloat rate = [[KWSelectManager sharedController].rateString floatValue];
+        CGFloat rmb = price * rate/100;
+        
+        NSString *rmbTitle = [NSString stringWithFormat:@"￥%.1f",rmb];
+        [titleArray addObject:rmbTitle];
         
     }
 
-    if ([KWSelectManager sharedController].hasHBLTC) {
-        
-        NSString *ltcPrice = [LTCManager sharedController].ltcPrice;
-        NSString *ltcTitle = [NSString stringWithFormat:@"L-%@",ltcPrice];
-        [titleArray addObject:ltcTitle];
-    }
-    
+  
     if (titleArray.count == 1) {
         
         self.statusItem.title = titleArray[0];
@@ -324,43 +214,22 @@
     return _menu;
 }
 
--(NSMenuItem*)bfItem
+
+
+-(NSMenuItem*)rmbItem
 {
-    if (!_bfItem) {
-        _bfItem = [[NSMenuItem alloc] initWithTitle:@"BTC(bitfinex)"
-                                             action:@selector(bfItemPressed:)
+    if (!_rmbItem) {
+        _rmbItem = [[NSMenuItem alloc] initWithTitle:@"RMB"
+                                             action:@selector(rmbItemPressed:)
                                       keyEquivalent:@""];
-        _bfItem.state = 0;
-    }
-
-    return _bfItem;
-}
-
-
--(NSMenuItem*)hbItem
-{
-    if (!_hbItem) {
-        _hbItem = [[NSMenuItem alloc] initWithTitle:@"BTC(火币)"
-                                             action:@selector(hbItemPressed:)
-                                      keyEquivalent:@""];
-        _hbItem.state = 0;
+        _rmbItem.state = 0;
     }
     
-    return _hbItem;
+    return _rmbItem;
 }
 
 
--(NSMenuItem*)hblItem
-{
-    if (!_hblItem) {
-        _hblItem = [[NSMenuItem alloc] initWithTitle:@"LTC(火币)"
-                                              action:@selector(hblItemPressed:)
-                                       keyEquivalent:@""];
-        _hblItem.state = 0;
-    }
-    
-    return _hblItem;
-}
+
 
 -(NSMenuItem*)exitItem
 {

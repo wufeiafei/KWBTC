@@ -16,17 +16,16 @@
 #import"KBCommon.h"
 #import "extobjc.h"
 #import "KWSelectManager.h"
-#import "WSManager.h"
+
 #import "BFWSManager.h"
-#import "LTCManager.h"
+
+#import "KWNetworkController.h"
 
 
 
-#define k_BF_BTC    @"KW_BF_BTC"
+#define k_RMB    @"KW_RMB"
 
-#define k_HB_BTC    @"KW_HB_BTC"
 
-#define k_HB_LTC    @"KW_HB_LTC"
 
 
 #endif /* PrefixHeader_pch */
