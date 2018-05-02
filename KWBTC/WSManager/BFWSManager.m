@@ -38,7 +38,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         
-        NSURL *url = [NSURL URLWithString:@"wss://api.bitfinex.com/ws/2"];
+        NSURL *url = [NSURL URLWithString:wsURL];
         socket = [[JFRWebSocket alloc] initWithURL:url
                                          protocols:@[@"chat",@"superchat"]];
         socket.delegate = self;
@@ -74,11 +74,18 @@
 //                          @"key": @"trade:1m:tBTCUSD"
 //                          };
     
-   NSDictionary *dic = @{
-                            @"event": @"subscribe",
-                            @"channel": @"ticker",
-                            @"symbol": @"tBTCUSD"
-                        };
+//   NSDictionary *dic = @{
+//                            @"event": @"subscribe",
+//                            @"channel": @"ticker",
+//                            @"symbol": @"tBTCUSD"
+//                        };
+    
+       NSDictionary *dic = @{
+                             @"sub": @"market.ethbtc.kline.1min",
+                             @"id": @"id1"
+                            };
+
+
     
     NSString *string = [KBCommon transferJsonToDataStringWithDic:dic];
     
@@ -153,16 +160,16 @@
 -(void)websocket:(JFRWebSocket*)socket didReceiveMessage:(NSString*)string {
     NSLog(@"got some text: %@",string);
     
-    NSData *uData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSError *error;
-    id data = [NSJSONSerialization JSONObjectWithData:uData
-                                               options:0
-                                                 error:&error];
-    
-    NSLog(@"data:%@",data);
-    
-    [self parseWithData:data];
+//    NSData *uData = [string dataUsingEncoding:NSUTF8StringEncoding];
+//
+//    NSError *error;
+//    id data = [NSJSONSerialization JSONObjectWithData:uData
+//                                               options:0
+//                                                 error:&error];
+//
+//    NSLog(@"data:%@",data);
+//
+//    [self parseWithData:data];
     
     
 }
@@ -171,7 +178,22 @@
 -(void)websocket:(JFRWebSocket*)socket didReceiveData:(NSData*)data {
     NSLog(@"got some binary data: %d",data.length);
     
+    
+    NSData *uData = [KBCommon uncompressZippedData:data];
+    
+    NSError *error;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:uData
+                                                        options:0
+                                                          error:&error];
+    NSLog(@"dic:%@",dic);
+    
+    if (dic[@"ping"]) {
+        
+        [self pongServerWithPongSting:dic[@"ping"]];
+        
+    }
 
+   
   
     
 }

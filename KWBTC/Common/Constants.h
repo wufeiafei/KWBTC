@@ -24,7 +24,12 @@
 
 
 
-
+//bitfinex
+//#define wsURL  @"wss://api.bitfinex.com/ws/2"
+//#define wsURL  @"wss://api.bitfinex.com/ws"
+//火币
+//#define wsURL  @"wss://api.huobipro.com/ws"
+#define wsURL    @"wss://api.hadax.com/ws"
 
 
 
