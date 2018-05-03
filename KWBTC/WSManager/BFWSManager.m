@@ -68,6 +68,12 @@
 -(void)sendBTC
 {
     
+//   NSDictionary *dic = @{
+//                         @"event": @"subscribe",
+//                         @"channel": @"ticker",
+//                         @"symbol": @"tBTCUSD"
+//                         };
+    
 //    NSDictionary *dic = @{
 //                          @"event": @"subscribe",
 //                          @"channel": @"candles",
@@ -81,7 +87,8 @@
 //                        };
     
        NSDictionary *dic = @{
-                             @"sub": @"market.ethbtc.kline.1min",
+                             
+                             @"sub": @"market.btcusdt.kline.1min",
                              @"id": @"id1"
                             };
 
@@ -115,7 +122,23 @@
 #pragma mark -- parse
 -(void)parseWithData:(id)data
 {
+    
+    if ([data isKindOfClass:[NSDictionary class]]&&data) {
+        NSDictionary *dic =  data;
+        
+        NSString *BTCPrice = dic[@"close"];
+        _btcPrice = BTCPrice;
+        if (_btcBlock) {
+            _btcBlock(BTCPrice);
+        }
+    }
+    
+}
 
+/*
+-(void)parseWithData:(id)data
+{
+   
     if ([data isKindOfClass:[NSArray class]]&&data) {
         NSArray *array =  data;
         
@@ -139,6 +162,7 @@
 
 
 }
+ */
 
 
 #pragma mark -- delegate
@@ -192,8 +216,13 @@
         [self pongServerWithPongSting:dic[@"ping"]];
         
     }
+    
+    if (dic[@"tick"]) {
+        
+        [self parseWithData:dic[@"tick"]];
+        
+    }
 
-   
   
     
 }

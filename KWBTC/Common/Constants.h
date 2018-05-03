@@ -29,7 +29,9 @@
 //#define wsURL  @"wss://api.bitfinex.com/ws"
 //火币
 //#define wsURL  @"wss://api.huobipro.com/ws"
-#define wsURL    @"wss://api.hadax.com/ws"
+//#define wsURL    @"wss://api.hadax.com/ws"
+//h火币测试环境
+#define  wsURL @"wss://api.huobi.br.com/ws"
 
 
 
