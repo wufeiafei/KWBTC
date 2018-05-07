@@ -25,6 +25,7 @@
 
 
 #define k_RMB    @"KW_RMB"
+#define K_LastPrice    @"KW_LastPrice"
 
 
 

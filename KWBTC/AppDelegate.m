@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) NSMenuItem *rmbItem;
 
+@property (nonatomic, strong) NSMenuItem *refershItem;
+
 @property (nonatomic, strong) NSMenuItem *exitItem;
 
 
@@ -34,6 +36,8 @@
     
     [self initSubView];
     
+    [self loadLocalData];
+    
 
     [BFWSManager sharedController].btcBlock = ^(NSString *price) {
         
@@ -41,7 +45,7 @@
         
     };
     
-    [self loadLocalData];
+    [self firstRequestData];
     
 }
 
@@ -57,6 +61,7 @@
 
 
     [self.menu addItem:self.rmbItem];
+    [self.menu addItem:self.refershItem];
     [self.menu addItem:self.exitItem];
     
     self.statusItem.menu = self.menu;
@@ -68,9 +73,57 @@
 {
 
     NSString *bRMBString = [[NSUserDefaults standardUserDefaults] objectForKey:k_RMB];
-   
+    NSDictionary *lastDic = [[NSUserDefaults standardUserDefaults] objectForKey:K_LastPrice];
+    NSLog(@"last:%@",lastDic);
     
-     [[BFWSManager sharedController] connect];
+    NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+    
+    NSString *btcPrice = lastDic[@"btc"];
+    CGFloat price = [btcPrice floatValue];
+    
+    NSString *bbtcTitle = [NSString stringWithFormat:@"B-$%.1f",price];
+    [titleArray addObject:bbtcTitle];
+   
+    if (bRMBString.length) {
+        
+        self.rmbItem.state = 1;
+        [KWSelectManager sharedController].hasRMB = YES;
+        
+        CGFloat rate = [lastDic[@"rate"] floatValue];
+        CGFloat rmb = price * rate/100;
+        
+        NSString *rmbTitle = [NSString stringWithFormat:@"￥%.1f",rmb];
+        [titleArray addObject:rmbTitle];
+        
+    }
+    
+
+    
+    if (titleArray.count == 1) {
+        
+        self.statusItem.title = titleArray[0];
+        return;
+    }
+    
+    if (titleArray.count > 1) {
+        
+        NSString *title = titleArray[0];
+        for (int i = 1; i < titleArray.count; i++) {
+            
+            title = [NSString stringWithFormat:@"%@ | %@",title,titleArray[i]];
+        }
+        self.statusItem.title = title;
+    }
+    
+    
+}
+
+#pragma mark -- first requst data
+-(void)firstRequestData
+{
+    NSString *bRMBString = [[NSUserDefaults standardUserDefaults] objectForKey:k_RMB];
+    
+    [[BFWSManager sharedController] connect];
     
     if (bRMBString.length) {
         
@@ -79,8 +132,8 @@
         
         [self requestFinanceRate];
     }
-    
 }
+
 
 -(void)requestFinanceRate
 {
@@ -135,11 +188,30 @@
 
 }
 
+-(void)refershItemPressed:(id)sender
+{
+    
+     [[BFWSManager sharedController] connect];
+    
+    if (self.rmbItem.state) {
+        
+       [self requestFinanceRate];
+        
+    }
+    
+    
+}
 
 
 -(void)exitItemPressed:(id)sender
 {
 
+    NSDictionary *lastDic = @{
+                              @"btc":[BFWSManager sharedController].btcPrice,
+                              @"rate":[KWSelectManager sharedController].rateString,
+                              };
+    
+    [[NSUserDefaults standardUserDefaults] setObject:lastDic forKey:K_LastPrice];
     [[NSApplication sharedApplication] terminate:self];
 
 }
@@ -216,18 +288,32 @@
 
 
 
+
+
 -(NSMenuItem*)rmbItem
 {
     if (!_rmbItem) {
         _rmbItem = [[NSMenuItem alloc] initWithTitle:@"RMB"
-                                             action:@selector(rmbItemPressed:)
-                                      keyEquivalent:@""];
+                                              action:@selector(rmbItemPressed:)
+                                       keyEquivalent:@""];
         _rmbItem.state = 0;
     }
     
     return _rmbItem;
 }
 
+
+-(NSMenuItem*)refershItem
+{
+    if (!_refershItem) {
+        _refershItem = [[NSMenuItem alloc] initWithTitle:@"刷新"
+                                                  action:@selector(refershItemPressed:)
+                                           keyEquivalent:@""];
+        _refershItem.state = 0;
+    }
+    
+    return _refershItem;
+}
 
 
 
