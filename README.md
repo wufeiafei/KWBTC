@@ -6,6 +6,8 @@
 
 这是一个mac上的状态栏，可实时显示比特币的价格。
 
+v4.1.0版本的dmg文件的百度网盘地址为：（https://pan.baidu.com/s/1UYj1IwaT9dsC7ruHLTEygQ），可直接下载安装。
+
 v4.0.0版本的dmg文件的百度网盘地址为：（https://pan.baidu.com/s/1YbsCCT5GjYHurkGN2v8u_g），可直接下载安装。
 
 v3.0.0版本的dmg文件的百度网盘地址为：（https://pan.baidu.com/s/1i5Bx59j），可直接下载安装。
