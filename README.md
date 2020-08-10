@@ -5,6 +5,7 @@
 加入了人民币和美元的及时汇率，可直接显示人民币价格。
 
 这是一个mac上的状态栏，可实时显示比特币的价格。
+v4.1.1版本的dmg文件的百度网盘地址为：（https://pan.baidu.com/s/18QvyQstkZuFtv1P2f7jbEQ), 提取码: k1mq ，可直接下载安装。
 
 v4.1.0版本的dmg文件的百度网盘地址为：（https://pan.baidu.com/s/1UYj1IwaT9dsC7ruHLTEygQ），可直接下载安装。
 
